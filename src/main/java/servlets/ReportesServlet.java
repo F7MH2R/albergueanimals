@@ -1,6 +1,6 @@
 package servlets;
 
-import com.google.gson.Gson; // Asegúrate de tener la librería Gson para convertir a JSON
+import com.google.gson.Gson;
 import database.DatabaseConnection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -12,18 +12,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @WebServlet("/ReportesServlet")
 public class ReportesServlet extends HttpServlet {
-    
-    private static final Gson gson = new Gson(); // Instancia de Gson para convertir listas a JSON
+
+    private static final Gson gson = new Gson();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Inicializar todas las listas antes del bloque try
-        List<Integer> adopcionesPorMes = new ArrayList<>();
-        List<String> meses = List.of("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio");
+        List<Integer> adopcionesPorMes = new ArrayList<>(Collections.nCopies(12, 0)); // Inicializar con 0 para cada mes
+        List<String> meses = List.of("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre");
 
         List<String> estados = new ArrayList<>();
         List<Integer> solicitudesPorEstado = new ArrayList<>();
@@ -41,7 +41,8 @@ public class ReportesServlet extends HttpServlet {
             ResultSet rsAdopciones = stmtAdopciones.executeQuery();
 
             while (rsAdopciones.next()) {
-                adopcionesPorMes.add(rsAdopciones.getInt("total"));
+                int mes = rsAdopciones.getInt("mes") - 1; // Meses en SQL empiezan en 1, en Java en 0
+                adopcionesPorMes.set(mes, rsAdopciones.getInt("total"));
             }
 
             // Consulta para estado de solicitudes de adopción

@@ -35,8 +35,9 @@
                                     <strong>Fecha de Ingreso:</strong> ${animal.fechaIngreso}
                                 </p>
                                 <a href="${pageContext.request.contextPath}/VerHistorialServlet?idAnimal=${animal.idAnimal}" class="btn btn-primary">Ver Detalle</a>
-                                <!-- Botón para realizar solicitud de adopción -->
                                 <a href="${pageContext.request.contextPath}/FormularioAdopcionServlet?idAnimal=${animal.idAnimal}" class="btn btn-success">Solicitud de Adopción</a>
+                                <!-- Botón para actualizar información -->
+                                <a href="${pageContext.request.contextPath}/ActualizarAnimalServlet?idAnimal=${animal.idAnimal}" class="btn btn-warning">Actualizar Información</a>
                             </div>
                         </div>
                     </div>
