@@ -7,16 +7,14 @@ public class Vacunas {
     private int idAnimal;
     private String nombreVacuna;
     private Date fechaAplicacion;
+    private String ml; // Nuevo atributo para la cantidad en ml
 
-    // Constructor vacío
-    public Vacunas() {}
-
-    // Constructor con parámetros
-    public Vacunas(int idVacuna, int idAnimal, String nombreVacuna, Date fechaAplicacion) {
+    public Vacunas(int idVacuna, int idAnimal, String nombreVacuna, Date fechaAplicacion, String ml) {
         this.idVacuna = idVacuna;
         this.idAnimal = idAnimal;
         this.nombreVacuna = nombreVacuna;
         this.fechaAplicacion = fechaAplicacion;
+        this.ml = ml;
     }
 
     // Getters y Setters
@@ -50,5 +48,13 @@ public class Vacunas {
 
     public void setFechaAplicacion(Date fechaAplicacion) {
         this.fechaAplicacion = fechaAplicacion;
+    }
+
+    public String getMl() {
+        return ml;
+    }
+
+    public void setMl(String ml) {
+        this.ml = ml;
     }
 }

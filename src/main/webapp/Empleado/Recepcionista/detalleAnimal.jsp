@@ -43,6 +43,7 @@
                 <th>Fecha</th>
                 <th>Tratamiento</th>
                 <th>Descripción</th>
+                <th>Estado del Tratamiento</th>
             </tr>
         </thead>
         <tbody>
@@ -51,6 +52,7 @@
                     <td>${historial.fecha}</td>
                     <td>${historial.tratamiento}</td>
                     <td>${historial.descripcion}</td>
+                    <td>${historial.estadoTratamiento}</td> <!-- Nuevo campo -->
                 </tr>
             </c:forEach>
         </tbody>
@@ -81,24 +83,27 @@
             </c:forEach>
         </tbody>
     </table>
+
     <!-- Vacunas aplicadas -->
-<h3>Vacunas Aplicadas</h3>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Nombre de la Vacuna</th>
-            <th>Fecha de Aplicación</th>
-        </tr>
-    </thead>
-    <tbody>
-        <c:forEach var="vacuna" items="${vacunasList}">
+    <h3>Vacunas Aplicadas</h3>
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>${vacuna.nombreVacuna}</td>
-                <td>${vacuna.fechaAplicacion}</td>
+                <th>Nombre de la Vacuna</th>
+                <th>Fecha de Aplicación</th>
+                <th>Mililitros (ml)</th> <!-- Nuevo campo -->
             </tr>
-        </c:forEach>
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            <c:forEach var="vacuna" items="${vacunasList}">
+                <tr>
+                    <td>${vacuna.nombreVacuna}</td>
+                    <td>${vacuna.fechaAplicacion}</td>
+                    <td>${vacuna.ml}</td> <!-- Nuevo campo -->
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

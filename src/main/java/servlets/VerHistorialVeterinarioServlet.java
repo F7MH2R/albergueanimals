@@ -20,8 +20,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/VerHistorialServlet")
-public class VerHistorialServlet extends HttpServlet {
+@WebServlet("/VerHistorialVeterinarioServlet")
+public class VerHistorialVeterinarioServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -104,7 +104,7 @@ public class VerHistorialServlet extends HttpServlet {
                 solicitudesAdopcionList.add(solicitud);
             }
 
-            // Obtener vacunas del animal incluyendo la cantidad en ml
+            // Obtener vacunas del animal con el campo ml
             String queryVacunas = "SELECT * FROM Vacunas WHERE id_animal = ?";
             PreparedStatement stmtVacunas = conn.prepareStatement(queryVacunas);
             stmtVacunas.setInt(1, idAnimal);
@@ -128,8 +128,8 @@ public class VerHistorialServlet extends HttpServlet {
             request.setAttribute("solicitudesAdopcionList", solicitudesAdopcionList);
             request.setAttribute("vacunasList", vacunasList);
 
-            // Redirigir a la vista de detalles del animal
-            request.getRequestDispatcher("/Empleado/Recepcionista/detalleAnimal.jsp").forward(request, response);
+            // Redirigir a la vista de detalles del animal para el veterinario
+            request.getRequestDispatcher("/Empleado/Veterinario/detalleAnimal.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
