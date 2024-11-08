@@ -52,6 +52,8 @@
     </script>
 </head>
 <body>
+      <%-- Incluir la barra de navegación para el recepcionista --%>
+        <jsp:include page="navbarRecepcionista.jsp" />
 <div class="container">
     <h1 class="my-4">Registro de Nuevo Animal</h1>
     <form action="${pageContext.request.contextPath}/RegistrarAnimalServlet" method="post" enctype="multipart/form-data">
