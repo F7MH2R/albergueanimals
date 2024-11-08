@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="path/to/your/bootstrap.css"> <!-- Ruta a Bootstrap -->
 </head>
 <body>
+      <%-- Incluir la barra de navegación para el recepcionista --%>
+        <jsp:include page="navbarRecepcionista.jsp" />
 <div class="container">
     <h1>Detalle de la Solicitud de Adopción</h1>
 

@@ -27,6 +27,8 @@
     </script>
 </head>
 <body>
+      <%-- Incluir la barra de navegación para el recepcionista --%>
+        <jsp:include page="navbarRecepcionista.jsp" />
     <h2>Formulario de Adopción</h2>
     <form action="${pageContext.request.contextPath}/RegistrarAdopcionServlet" method="post">
         <label>Nombre del Adoptante:</label>
