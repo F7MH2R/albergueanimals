@@ -98,13 +98,13 @@ public class LoginServlet extends HttpServlet {
                 destino = "Empleado/Recepcionista/HomeRecepcionista.jsp";
                 break;
             case "Cuidador":
-                destino = "Empleado/Cuidador/HomeCuidador.jsp";
+                destino = "Empleado/Recepcionista/HomeRecepcionista.jsp";
                 break;
             case "Auxiliar":
-                destino = "Empleado/Auxiliar/HomeAuxiliar.jsp";
+                destino = "Empleado/Recepcionista/HomeRecepcionista.jsp";
                 break;
             case "Asistente":
-                destino = "Empleado/Asistente/HomeAsistente.jsp";
+                destino = "Empleado/Recepcionista/HomeRecepcionista.jsp";
                 break;
             default:
                 throw new IllegalArgumentException("Puesto no reconocido: " + puesto);
