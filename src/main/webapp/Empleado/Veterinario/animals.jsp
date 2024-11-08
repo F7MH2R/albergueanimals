@@ -8,6 +8,8 @@
         <link rel="stylesheet" href="path/to/your/bootstrap.css"> <!-- Ruta a Bootstrap -->
     </head>
     <body>
+               <%-- Incluir el navbar para el veterinario --%>
+    <%@ include file="navbarVeterinario.jsp" %>
         <div class="container">
             <h1 class="my-4">Animales</h1>
             <div class="row">

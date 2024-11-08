@@ -69,7 +69,7 @@ public class VerHistorialServlet extends HttpServlet {
                 imagenesList.add(imagen);
             }
 
-            // Obtener historial médico del animal
+            // Obtener historial médico del animal con estado del tratamiento
             String queryHistorialMedico = "SELECT * FROM Historial_Medico WHERE id_animal = ?";
             PreparedStatement stmtHistorial = conn.prepareStatement(queryHistorialMedico);
             stmtHistorial.setInt(1, idAnimal);
@@ -81,7 +81,8 @@ public class VerHistorialServlet extends HttpServlet {
                         rsHistorial.getInt("id_animal"),
                         rsHistorial.getDate("fecha"),
                         rsHistorial.getString("tratamiento"),
-                        rsHistorial.getString("descripcion")
+                        rsHistorial.getString("descripcion"),
+                        rsHistorial.getString("estado_tratamiento") // nuevo campo
                 );
                 historialMedicoList.add(historial);
             }
@@ -103,7 +104,7 @@ public class VerHistorialServlet extends HttpServlet {
                 solicitudesAdopcionList.add(solicitud);
             }
 
-            // Obtener vacunas del animal
+            // Obtener vacunas del animal incluyendo la cantidad en ml
             String queryVacunas = "SELECT * FROM Vacunas WHERE id_animal = ?";
             PreparedStatement stmtVacunas = conn.prepareStatement(queryVacunas);
             stmtVacunas.setInt(1, idAnimal);
@@ -114,7 +115,8 @@ public class VerHistorialServlet extends HttpServlet {
                         rsVacunas.getInt("id_vacuna"),
                         rsVacunas.getInt("id_animal"),
                         rsVacunas.getString("nombre_vacuna"),
-                        rsVacunas.getDate("fecha_aplicacion")
+                        rsVacunas.getDate("fecha_aplicacion"),
+                        rsVacunas.getString("ml") // nuevo campo
                 );
                 vacunasList.add(vacuna);
             }

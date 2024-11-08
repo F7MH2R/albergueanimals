@@ -23,21 +23,22 @@ public class AgregarVacunaServlet extends HttpServlet {
         request.getRequestDispatcher("/Empleado/Veterinario/formularioAgregarVacuna.jsp").forward(request, response);
     }
 
-    @Override
+      @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idAnimal = Integer.parseInt(request.getParameter("idAnimal"));
         String nombreVacuna = request.getParameter("nombreVacuna");
-        Date fechaAplicacion = new Date(); // Fecha actual
+        String ml = request.getParameter("ml");
 
         try (Connection conn = DatabaseConnection.initializeDatabase()) {
-            String query = "INSERT INTO Vacunas (id_animal, nombre_vacuna, fecha_aplicacion) VALUES (?, ?, ?)";
+            String query = "INSERT INTO vacunas (id_animal, nombre_vacuna, fecha_aplicacion, ml) VALUES (?, ?, NOW(), ?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, idAnimal);
             stmt.setString(2, nombreVacuna);
-            stmt.setDate(3, new java.sql.Date(fechaAplicacion.getTime()));
-            stmt.executeUpdate();
+            stmt.setString(3, ml);
 
+            stmt.executeUpdate();
             response.sendRedirect(request.getContextPath() + "/VerHistorialVeterinarioServlet?idAnimal=" + idAnimal);
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/General/ErrorPage.jsp");

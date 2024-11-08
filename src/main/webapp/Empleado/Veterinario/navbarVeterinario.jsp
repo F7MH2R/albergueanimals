@@ -20,15 +20,7 @@
                         <a class="nav-link" href="${pageContext.request.contextPath}/VeterinarioAnimalsServlet">Lista de Animales</a>
                     </li>
 
-                    <!-- Enlace para gestionar historial médico -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/GestionHistorialServlet">Gestionar Historial Médico</a>
-                    </li>
-
-                    <!-- Enlace para registrar vacunas -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="${pageContext.request.contextPath}/RegistrarVacunaServlet">Registrar Vacunas</a>
-                    </li>
+                 
                 </ul>
 
                 <!-- Opciones del usuario (Cerrar sesión, etc.) -->

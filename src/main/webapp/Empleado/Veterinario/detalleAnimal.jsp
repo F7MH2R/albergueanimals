@@ -2,12 +2,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
+    
     <head>
         <meta charset="UTF-8">
         <title>Detalle del Animal</title>
         <link rel="stylesheet" href="path/to/your/bootstrap.css"> <!-- Ruta a Bootstrap -->
     </head>
     <body>
+          <%-- Incluir el navbar para el veterinario --%>
+    <%@ include file="navbarVeterinario.jsp" %>
         <div class="container">
             <h1>Detalle del Animal</h1>
 
@@ -29,7 +32,7 @@
                             <option value="" disabled selected>Seleccionar nuevo estado</option>
                             <option value="Saludable">Saludable</option>
                             <option value="En Tratamiento">En Tratamiento</option>
-                            <option value="En Recuperación">En Recuperación</option>
+                            <option value="En Recuperación">En Recuperaci&oacute;n</option>
                         </select>
                         <button type="submit" class="btn btn-warning mt-2">Cambiar Estado de Salud</button>
                     </form>
@@ -54,6 +57,7 @@
                         <th>Fecha</th>
                         <th>Tratamiento</th>
                         <th>Descripción</th>
+                        <th>Estado del Tratamiento</th> <!-- Nuevo campo -->
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +66,7 @@
                             <td>${historial.fecha}</td>
                             <td>${historial.tratamiento}</td>
                             <td>${historial.descripcion}</td>
+                            <td>${historial.estadoTratamiento}</td> <!-- Nuevo campo -->
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -98,6 +103,7 @@
                     <tr>
                         <th>Nombre de la Vacuna</th>
                         <th>Fecha de Aplicación</th>
+                        <th>Mililitros (ml)</th> <!-- Nuevo campo -->
                     </tr>
                 </thead>
                 <tbody>
@@ -105,11 +111,11 @@
                         <tr>
                             <td>${vacuna.nombreVacuna}</td>
                             <td>${vacuna.fechaAplicacion}</td>
+                            <td>${vacuna.ml}</td> <!-- Nuevo campo -->
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <!-- Botón para añadir vacuna aplicada -->
             <!-- Botón para añadir vacuna aplicada -->
             <form action="${pageContext.request.contextPath}/AgregarVacunaServlet" method="get">
                 <input type="hidden" name="idAnimal" value="${animal.idAnimal}">
