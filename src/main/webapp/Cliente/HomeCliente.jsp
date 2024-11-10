@@ -1,18 +1,22 @@
-<%@ page import="modelos.Usuarios" %>
-<%
-    Usuarios usuario = (Usuarios) session.getAttribute("usuario");
+<%@ page contentType="text/html; charset=UTF-8" %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Cliente</title>
+    <link rel="stylesheet" href="path/to/your/bootstrap.css"> <!-- Ruta a Bootstrap -->
+</head>
+<body>
 
-    if (usuario == null) {
-        request.getRequestDispatcher("/General/login.jsp").forward(request, response);
-        return;
-    }
+    <%-- Incluir el navbar para el cliente --%>
+    <jsp:include page="../General/navCliente.jsp" />
 
-    String rol = usuario.getRol();
-%>
+    <div class="container mt-4">
+        <h1>Bienvenido, Cliente</h1>
+        <p>Esta es la página de inicio para los clientes.</p>
+        
+        <!-- Aquí puedes agregar más contenido específico del Home del Veterinario -->
+    </div>
 
-<%-- Incluir el archivo de navegaci�n adecuado --%>
-<jsp:include page="<%= (rol.equals("Administrador") ? "../General/navAdmin.jsp" : 
-                     (rol.equals("Empleado") ? "../General/navEmpleado.jsp" : 
-                     "../General/navCliente.jsp")) %>" />
-
-<h1>Bienvenido a la p�gina de inicio del Administrador</h1>
+</body>
+</html>
