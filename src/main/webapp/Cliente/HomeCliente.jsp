@@ -18,5 +18,7 @@
         <!-- Aquí puedes agregar más contenido específico del Home del Veterinario -->
     </div>
 
+     <%-- Incluir el footer para el cliente --%>
+    <jsp:include page="../General/footer.jsp" />
 </body>
 </html>

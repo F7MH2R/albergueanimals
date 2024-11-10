@@ -7,7 +7,7 @@
 <nav>
     <ul>
         <li>Bienvenido, <%= usuario.getNombreCompleto() %> (Cliente)</li>
-       
+        <li><a href="<%= request.getContextPath() %>/MisAdopcionesServlet">Mis Adopciones</a></li>
         <li><a href="<%= request.getContextPath()%>/LogoutServlet">Cerrar Sesión</a></li>
     </ul>
 </nav>
