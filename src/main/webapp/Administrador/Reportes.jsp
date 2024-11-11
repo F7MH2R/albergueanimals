@@ -24,39 +24,85 @@
     <title>Reportes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* General background and font settings */
+        body {
+            background-color: #F0EEED;
+            
+        }
+
+        /* Container styling */
+        .container {
+            margin-top: 50px;
+            margin-bottom: 50px;
+            max-width: 1000px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header styling */
+        h1 {
+            font-size: 35px;
+            color: #4A665E;
+            margin-bottom: 20px;
+        }
+
+        /* Subheader styling for each chart */
+        h2 {
+            font-size: 25px;
+            color: #4A665E;
+            margin-bottom: 10px;
+        }
+
+        /* Paragraph styling */
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        /* Canvas styling to ensure uniform chart size */
+        .chart-container {
+            width: 100%;
+            height: 350px;
+            margin-bottom: 150px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container my-5">
+    <div class="container">
         <h1 class="text-center mb-4">Reportes</h1>
 
         <div class="row mb-4">
             <!-- Gráfico de Adopciones por Mes -->
-            <div class="col-md-6">
-                <h2>Adopciones por Mes</h2>
-                <p>Este gráfico muestra el número de adopciones realizadas en cada mes.</p>
+            <div class="col-md-6 chart-container">
+                <h2 class="text-center">Adopciones por Mes</h2>
+                <p class="text-center">Este gráfico muestra el número de adopciones realizadas en cada mes.</p>
                 <canvas id="adopcionesPorMesChart"></canvas>
             </div>
             
             <!-- Gráfico de Solicitudes por Estado -->
-            <div class="col-md-6">
-                <h2>Solicitudes por Estado</h2>
-                <p>Este gráfico indica la cantidad de solicitudes de adopción en cada estado.</p>
+            <div class="col-md-6 chart-container">
+                <h2 class="text-center">Solicitudes por Estado</h2>
+                <p class="text-center">Este gráfico indica la cantidad de solicitudes de adopción en cada estado.</p>
                 <canvas id="solicitudesPorEstadoChart"></canvas>
             </div>
         </div>
 
         <div class="row mb-4">
             <!-- Gráfico de Animales por Raza -->
-            <div class="col-md-6">
-                <h2>Animales por Raza</h2>
-                <p>Distribución de los animales registrados por diferentes razas.</p>
+            <div class="col-md-6 chart-container">
+                <h2 class="text-center">Animales por Raza</h2>
+                <p class="text-center">Distribución de los animales registrados por diferentes razas.</p>
                 <canvas id="animalesPorRazaChart"></canvas>
             </div>
             
             <!-- Gráfico de Animales Registrados por Día -->
-            <div class="col-md-6">
-                <h2>Animales Registrados por Día</h2>
-                <p>Este gráfico de pastel muestra el número de animales registrados en cada día específico.</p>
+            <div class="col-md-6 chart-container">
+                <h2 class="text-center">Animales Registrados por Día</h2>
+                <p class="text-center">Este gráfico de pastel muestra el número de animales registrados en cada día específico.</p>
                 <canvas id="animalesPorDiaChart"></canvas>
             </div>
         </div>
@@ -88,6 +134,7 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     y: { beginAtZero: true }
                 }
@@ -109,6 +156,7 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     y: { beginAtZero: true }
                 }
@@ -130,6 +178,7 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     y: { beginAtZero: true }
                 }
@@ -164,9 +213,12 @@
                 }]
             },
             options: {
-                responsive: true
+                responsive: true,
+                maintainAspectRatio: false
             }
         });
     </script>
 </body>
 </html>
+
+

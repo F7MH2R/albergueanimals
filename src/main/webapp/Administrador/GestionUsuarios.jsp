@@ -37,7 +37,7 @@
            margin-left: 400px;
             margin-top: 50px;
             margin-bottom: 50px;
-            max-width: 1075px;
+            max-width: 1095px;
             background-color: #F7F7F7;
             padding: 20px 40px;
             border-radius: 10px;
