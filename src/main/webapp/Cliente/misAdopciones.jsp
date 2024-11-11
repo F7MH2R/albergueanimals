@@ -32,6 +32,10 @@
             </c:if>
         </div>
     </c:forEach>
+    <form action="HomeClienteServlet" method="get" style="display: inline;">
+    <button type="submit" class="btn btn-primary">Volver al Home Cliente</button>
+</form>
+
     <%-- Incluir el footer para el cliente --%>
     <jsp:include page="../General/footer.jsp" />
 </body>
