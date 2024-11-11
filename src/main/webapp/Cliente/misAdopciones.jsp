@@ -7,6 +7,8 @@
     <title>Mis Adopciones</title>
 </head>
 <body>
+    <%-- Incluir el navbar para el cliente --%>
+    <jsp:include page="../General/navCliente.jsp" />
     <h2>Mis Adopciones</h2>
 
     <c:forEach var="solicitud" items="${solicitudesList}">
@@ -30,6 +32,8 @@
             </c:if>
         </div>
     </c:forEach>
+    <%-- Incluir el footer para el cliente --%>
+    <jsp:include page="../General/footer.jsp" />
 </body>
 </html>
 
