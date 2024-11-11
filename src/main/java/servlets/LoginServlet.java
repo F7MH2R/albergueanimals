@@ -38,49 +38,51 @@ public class LoginServlet extends HttpServlet {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                boolean estado = resultSet.getBoolean("estado");
-                HttpSession session = request.getSession();
+    boolean estado = resultSet.getBoolean("estado");
+    HttpSession session = request.getSession();
 
-                if (estado) {
-                    Usuarios usuario = new Usuarios(
-                            resultSet.getInt("id_usuario"),
-                            resultSet.getString("nombre_usuario"),
-                            resultSet.getString("contrasena"),
-                            resultSet.getString("nombre_completo"),
-                            resultSet.getString("correo"),
-                            resultSet.getString("rol"),
-                            resultSet.getTimestamp("fecha_registro"),
-                            estado,
-                            resultSet.getString("puesto"),
-                            resultSet.getString("telefono")
-                    );
+    if (estado) {
+        Usuarios usuario = new Usuarios(
+                resultSet.getInt("id_usuario"),
+                resultSet.getString("nombre_usuario"),
+                resultSet.getString("contrasena"),
+                resultSet.getString("nombre_completo"),
+                resultSet.getString("correo"),
+                resultSet.getString("rol"),
+                resultSet.getTimestamp("fecha_registro"),
+                estado,
+                resultSet.getString("puesto"),
+                resultSet.getString("telefono")
+        );
 
-                    session.setAttribute("usuario", usuario);
+        session.setAttribute("usuario", usuario);
 
-                    String rol = usuario.getRol();
-                    if ("Administrador".equals(rol)) {
-                        request.getRequestDispatcher("Administrador/HomeAdmin.jsp").forward(request, response);
-                    } else if ("Empleado".equals(rol)) {
-                        if (usuario.getPuesto() != null) {
-                            redirigirPorPuesto(request, response, usuario.getPuesto());
-                        } else {
-                            request.setAttribute("error", "Puesto no reconocido para el empleado.");
-                            request.getRequestDispatcher("General/login.jsp").forward(request, response);
-                        }
-                    } else if ("Cliente".equals(rol)) {
-                        request.getRequestDispatcher("Cliente/HomeCliente.jsp").forward(request, response);
-                    } else {
-                        request.setAttribute("error", "Rol no reconocido.");
-                        request.getRequestDispatcher("General/login.jsp").forward(request, response);
-                    }
-                } else {
-                    request.setAttribute("error", "Usuario inactivo. Contacte al administrador.");
-                    request.getRequestDispatcher("General/login.jsp").forward(request, response);
-                }
+        String rol = usuario.getRol();
+        if ("Administrador".equals(rol)) {
+            request.getRequestDispatcher("Administrador/HomeAdmin.jsp").forward(request, response);
+        } else if ("Empleado".equals(rol)) {
+            if (usuario.getPuesto() != null) {
+                redirigirPorPuesto(request, response, usuario.getPuesto());
             } else {
-                request.setAttribute("error", "Usuario o contraseña incorrectos.");
+                request.setAttribute("error", "Puesto no reconocido para el empleado.");
                 request.getRequestDispatcher("General/login.jsp").forward(request, response);
             }
+        } else if ("Cliente".equals(rol)) {
+            // Cambia de `forward` a `sendRedirect` para el cliente
+            response.sendRedirect("HomeClienteServlet"); // Redirige a HomeClienteServlet
+        } else {
+            request.setAttribute("error", "Rol no reconocido.");
+            request.getRequestDispatcher("General/login.jsp").forward(request, response);
+        }
+    } else {
+        request.setAttribute("error", "Usuario inactivo. Contacte al administrador.");
+        request.getRequestDispatcher("General/login.jsp").forward(request, response);
+    }
+} else {
+    request.setAttribute("error", "Usuario o contraseña incorrectos.");
+    request.getRequestDispatcher("General/login.jsp").forward(request, response);
+}
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             request.setAttribute("error", "Error en la conexión a la base de datos.");
