@@ -7,6 +7,7 @@ public class Adopciones {
     private int idAnimal;
     private int idAdoptante;
     private Date fechaAdopcion;
+    private String estado; // Nuevo atributo estado
 
     public Adopciones() {}
 
@@ -17,6 +18,7 @@ public class Adopciones {
         this.fechaAdopcion = fechaAdopcion;
     }
 
+    // Getters y Setters
     public int getIdAdopcion() {
         return idAdopcion;
     }
@@ -47,5 +49,15 @@ public class Adopciones {
 
     public void setFechaAdopcion(Date fechaAdopcion) {
         this.fechaAdopcion = fechaAdopcion;
+    }
+
+    // Nuevo método getEstado
+    public String getEstado() {
+        return estado;
+    }
+
+    // Nuevo método setEstado
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 }

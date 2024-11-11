@@ -1,9 +1,3 @@
-<%-- 
-    Document   : Register
-    Created on : Nov 2, 2024, 12:45:56 PM
-    Author     : BLACK
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +6,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        
+        <h1>Bienvenido áca podras crear un usuario para adoptar animales</h1>
     </body>
 </html>
