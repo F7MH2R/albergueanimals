@@ -16,7 +16,7 @@
 
         .container-formulario-adopcion {
             max-width: 800px;
-            margin: 30px auto;
+            margin: 100px auto;
             padding: 20px;
             background-color: #ffffff;
             border-radius: 8px;
@@ -51,7 +51,7 @@
 
         .form-group input[type="text"],
         .form-group input[type="email"] {
-            width: 100%;
+            width: 97%;
             padding: 10px;
             font-size: 16px;
             color: #666;
@@ -121,7 +121,7 @@
 
             <div class="form-group">
                 <label>Teléfono:</label>
-                <input type="text" name="telefono" required>
+                <input type="text" name="telefono" maxlength="8" pattern="\d{8}" title="Debe contener solo números y no más de 8 dígitos" required>
             </div>
 
             <div class="form-group">

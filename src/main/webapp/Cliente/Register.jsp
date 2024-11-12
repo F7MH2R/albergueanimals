@@ -42,7 +42,7 @@
         input[type="text"],
         input[type="email"],
         input[type="password"] {
-            width: 100%;
+            width: 95%;
             padding: 10px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
@@ -51,6 +51,7 @@
         }
 
         .btn-register {
+            
             background-color: #4A665E;
             color: #ffffff;
             padding: 10px 20px;

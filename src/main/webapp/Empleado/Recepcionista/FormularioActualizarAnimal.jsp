@@ -41,7 +41,14 @@
             margin-bottom: 5px;
         }
 
-        .form-control, .form-select {
+        .form-control  {
+            width: 97%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .form-select{
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -154,7 +161,7 @@
             <c:forEach var="i" begin="1" end="5">
                 <div class="form-group">
                     <label class="form-label">Imagen ${i}</label>
-                    <input type="file" class="form-control" name="imagen${i}" accept="image/*">
+                    <input type="file" class="form-control" name="imagen${i}" accept="image/*" required>
                 </div>
             </c:forEach>
 

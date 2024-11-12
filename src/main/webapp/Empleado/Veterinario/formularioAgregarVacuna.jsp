@@ -38,9 +38,13 @@
         }
 
         .form-control, .form-select {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            border: 1px solid #cccccc;
-            margin-bottom: 20px; /* Espacio entre los campos */
+            box-sizing: border-box;
         }
 
         .btnGuardarVacuna {

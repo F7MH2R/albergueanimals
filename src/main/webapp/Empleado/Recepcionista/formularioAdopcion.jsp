@@ -98,13 +98,13 @@
             <input type="text" id="nombreAdoptante" name="nombreAdoptante" onblur="buscarCliente()" class="form-control" required>
 
             <label class="form-label">Correo Electrónico:</label>
-            <input type="email" id="correo" name="correo" class="form-control">
+            <input type="email" id="correo" name="correo" class="form-control" required>
 
             <label class="form-label">Teléfono:</label>
-            <input type="text" id="telefono" name="telefono" class="form-control">
+            <input type="text" id="telefono" name="telefono" class="form-control" maxlength="8" pattern="\d{8}" title="Debe contener solo números y no más de 8 dígitos" required>
 
             <label class="form-label">Dirección:</label>
-            <input type="text" id="direccion" name="direccion" class="form-control">
+            <input type="text" id="direccion" name="direccion" class="form-control" required>
 
             <button type="submit" class="btn-submit">Enviar Solicitud de Adopción</button>
         </form>

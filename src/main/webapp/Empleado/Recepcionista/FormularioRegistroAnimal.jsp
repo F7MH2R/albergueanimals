@@ -38,8 +38,15 @@
             font-weight: bold;
         }
 
-        .form-control, .form-select {
+        .form-control {
             font-size: 16px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            width: 97%;
+        }
+        .form-select{
+             font-size: 16px;
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -170,10 +177,11 @@
 
             <!-- Campos para cargar imágenes con previsualización -->
             <div class="mb-3">
-                <label for="imagen1" class="form-label">Imagen 1</label>
-                <input type="file" class="form-control" id="imagen1" name="imagen1" accept="image/*" onchange="previewImage(this, 'preview1')">
+                <label for="imagen1" class="form-label">Imagen</label>
+                <input type="file" class="form-control" id="imagen1" name="imagen1" accept="image/*" onchange="previewImage(this, 'preview1')" required>
                 <img id="preview1" class="preview-img" src="#" alt="Previsualización de Imagen 1">
             </div>
+
 
             <button type="submit" class="btn btnRegAnimal">Registrar Animal</button>
         </form>
