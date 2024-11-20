@@ -6,6 +6,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,10 +15,10 @@ import java.sql.SQLException;
 @WebServlet("/AgregarUsuarioCliServlet")
 public class AgregarUsuarioCliServlet extends HttpServlet {
 
-    @Override
+   @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Renderiza el formulario de registro (Register.jsp)
+        // Redirigir al formulario de registro
         request.getRequestDispatcher("/Cliente/Register.jsp").forward(request, response);
     }
 
@@ -31,16 +32,30 @@ public class AgregarUsuarioCliServlet extends HttpServlet {
         String correo = request.getParameter("correo");
         String telefono = request.getParameter("telefono");
 
-        // Validar que los campos requeridos no estén vacíos
-        if (nombreUsuario == null || contrasena == null || nombreCompleto == null || correo == null
-                || nombreUsuario.isEmpty() || contrasena.isEmpty() || nombreCompleto.isEmpty() || correo.isEmpty()) {
+        // Validar campos obligatorios
+        if (nombreUsuario == null || contrasena == null || nombreCompleto == null || correo == null ||
+            nombreUsuario.isEmpty() || contrasena.isEmpty() || nombreCompleto.isEmpty() || correo.isEmpty()) {
             request.setAttribute("error", "Todos los campos obligatorios deben ser completados.");
             request.getRequestDispatcher("/Cliente/Register.jsp").forward(request, response);
             return;
         }
 
+        // Validar formato del correo electrónico
+        if (!correo.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            request.setAttribute("error", "El correo electrónico no es válido.");
+            request.getRequestDispatcher("/Cliente/Register.jsp").forward(request, response);
+            return;
+        }
+
+        // Validar que el teléfono sea numérico
+        if (telefono != null && !telefono.isEmpty() && !telefono.matches("\\d+")) {
+            request.setAttribute("error", "El teléfono debe contener solo números.");
+            request.getRequestDispatcher("/Cliente/Register.jsp").forward(request, response);
+            return;
+        }
+
         try (Connection conn = DatabaseConnection.initializeDatabase()) {
-            // Consulta SQL para insertar el usuario
+            // Insertar el cliente en la base de datos
             String sql = "INSERT INTO usuarios (nombre_usuario, contrasena, nombre_completo, correo, telefono, rol, estado, fecha_registro) "
                        + "VALUES (?, ?, ?, ?, ?, 'Cliente', 1, NOW())";
 
@@ -54,8 +69,8 @@ public class AgregarUsuarioCliServlet extends HttpServlet {
             // Ejecutar la consulta
             int rowsInserted = stmt.executeUpdate();
             if (rowsInserted > 0) {
-                // Redirigir a una página de éxito
-                response.sendRedirect(request.getContextPath() + "/Cliente/ConfirmacionAdopcion.jsp");
+                // Redirigir al LoginServlet después del registro exitoso
+                response.sendRedirect(request.getContextPath() + "/LoginServlet");
             } else {
                 // Enviar un mensaje de error si no se pudo insertar el usuario
                 request.setAttribute("error", "No se pudo registrar el usuario. Intenta nuevamente.");
