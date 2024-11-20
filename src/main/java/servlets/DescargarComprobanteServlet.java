@@ -2,6 +2,10 @@ package servlets;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import database.DatabaseConnection;
@@ -17,6 +21,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Base64;
 
 @WebServlet("/DescargarComprobanteServlet")
 public class DescargarComprobanteServlet extends HttpServlet {
@@ -44,12 +49,14 @@ public class DescargarComprobanteServlet extends HttpServlet {
         String raza = "";
         int edad = 0;
         String estadoSalud = "";
+        String imagenBase64 = null;
 
         try (Connection conn = DatabaseConnection.initializeDatabase()) {
-            String query = "SELECT a.nombre AS nombre_animal, a.especie, a.raza, a.edad, a.estado_salud " +
+            String query = "SELECT a.nombre AS nombre_animal, a.especie, a.raza, a.edad, a.estado_salud, ia.imagen " +
                            "FROM Solicitudes_Adopcion sa " +
                            "JOIN Animales a ON sa.id_animal = a.id_animal " +
-                           "WHERE sa.id_solicitud = ?";
+                           "LEFT JOIN Imagenes_Animales ia ON a.id_animal = ia.id_animal " +
+                           "WHERE sa.id_solicitud = ? LIMIT 1";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, idSolicitud);
             ResultSet rs = stmt.executeQuery();
@@ -60,6 +67,7 @@ public class DescargarComprobanteServlet extends HttpServlet {
                 raza = rs.getString("raza");
                 edad = rs.getInt("edad");
                 estadoSalud = rs.getString("estado_salud");
+                imagenBase64 = rs.getString("imagen");
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -71,14 +79,43 @@ public class DescargarComprobanteServlet extends HttpServlet {
             Document document = new Document();
             PdfWriter.getInstance(document, out);
             document.open();
-            document.add(new Paragraph("Comprobante de Adopción"));
-            document.add(new Paragraph("ID de Solicitud: " + idSolicitud));
-            document.add(new Paragraph("Detalles del Animal Adoptado:"));
-            document.add(new Paragraph("Nombre del Animal: " + nombreAnimal));
-            document.add(new Paragraph("Especie: " + especie));
-            document.add(new Paragraph("Raza: " + raza));
-            document.add(new Paragraph("Edad: " + edad + " años"));
-            document.add(new Paragraph("Estado de Salud: " + estadoSalud));
+
+            // Título
+            Font titleFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 18);
+            Paragraph title = new Paragraph("Comprobante de Adopción", titleFont);
+            title.setAlignment(Element.ALIGN_CENTER);
+            document.add(title);
+
+            // Espaciado
+            document.add(new Paragraph("\n"));
+
+            // Información del animal
+            Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+            document.add(new Paragraph("Detalles del Animal Adoptado:", normalFont));
+            document.add(new Paragraph("Nombre del Animal: " + nombreAnimal, normalFont));
+            document.add(new Paragraph("Especie: " + especie, normalFont));
+            document.add(new Paragraph("Raza: " + raza, normalFont));
+            document.add(new Paragraph("Edad: " + edad + " años", normalFont));
+            document.add(new Paragraph("Estado de Salud: " + estadoSalud, normalFont));
+
+            // Espaciado
+            document.add(new Paragraph("\n"));
+
+            // Agregar imagen del animal si está disponible
+            if (imagenBase64 != null) {
+                try {
+                    Image image = Image.getInstance(Base64.getDecoder().decode(imagenBase64));
+                    image.scaleToFit(200, 200); // Escalar la imagen a 200x200 píxeles
+                    image.setAlignment(Element.ALIGN_CENTER);
+                    document.add(image);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    document.add(new Paragraph("No se pudo cargar la imagen del animal."));
+                }
+            } else {
+                document.add(new Paragraph("No hay imagen disponible para este animal."));
+            }
+
             document.close();
         } catch (DocumentException e) {
             e.printStackTrace();

@@ -40,7 +40,7 @@ public class GenerarComprobanteServlet extends HttpServlet {
             // Obtener los datos del animal y del adoptante
             Animales animal = obtenerDatosAnimal(conn, idAnimal);
             Adoptantes adoptante = obtenerDatosAdoptante(conn, idAnimal);
-            ImagenesAnimales imagenAnimal = obtenerImagenPorIdAnimal(conn, idAnimal); // Obtener la imagen asociada al animal
+            ImagenesAnimales imagenAnimal = obtenerImagenPorIdAnimal(conn, idAnimal);
 
             // Crear el documento PDF
             Document document = new Document();
@@ -54,36 +54,46 @@ public class GenerarComprobanteServlet extends HttpServlet {
             title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
 
-            // Información del adoptante
-            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
-            Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
+            // Verificar si el animal existe
+            if (animal != null) {
+                // Información del adoptante
+                Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12);
+                Font normalFont = FontFactory.getFont(FontFactory.HELVETICA, 12);
 
-            document.add(new Paragraph("\nInformación del Adoptante:", headerFont));
-            document.add(new Paragraph("Nombre: " + adoptante.getNombre(), normalFont));
-            document.add(new Paragraph("Correo: " + adoptante.getCorreo(), normalFont));
-            document.add(new Paragraph("Teléfono: " + adoptante.getTelefono(), normalFont));
-            document.add(new Paragraph("Dirección: " + adoptante.getDireccion(), normalFont));
-
-            // Espacio
-            document.add(new Paragraph("\nInformación del Animal Adoptado:", headerFont));
-            document.add(new Paragraph("Nombre: " + animal.getNombre(), normalFont));
-            document.add(new Paragraph("Especie: " + animal.getEspecie(), normalFont));
-            document.add(new Paragraph("Raza: " + animal.getRaza(), normalFont));
-            document.add(new Paragraph("Edad: " + animal.getEdad() + " años", normalFont));
-            document.add(new Paragraph("Estado de Salud: " + animal.getEstadoSalud(), normalFont));
-            document.add(new Paragraph("Fecha de Ingreso: " + animal.getFechaIngreso(), normalFont));
-
-            // Agregar imagen del animal, si está disponible
-            if (imagenAnimal != null && imagenAnimal.getImagen() != null) {
-                try {
-                    Image image = Image.getInstance(Base64.getDecoder().decode(imagenAnimal.getImagen()));
-                    image.scaleToFit(150, 150);
-                    image.setAlignment(Element.ALIGN_CENTER);
-                    document.add(new Paragraph("\n"));
-                    document.add(image);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                document.add(new Paragraph("\nInformación del Adoptante:", headerFont));
+                if (adoptante != null) {
+                    document.add(new Paragraph("Nombre: " + adoptante.getNombre(), normalFont));
+                    document.add(new Paragraph("Correo: " + adoptante.getCorreo(), normalFont));
+                    document.add(new Paragraph("Teléfono: " + adoptante.getTelefono(), normalFont));
+                    document.add(new Paragraph("Dirección: " + adoptante.getDireccion(), normalFont));
+                } else {
+                    document.add(new Paragraph("Información no disponible", normalFont));
                 }
+
+                // Información del animal
+                document.add(new Paragraph("\nInformación del Animal Adoptado:", headerFont));
+                document.add(new Paragraph("Nombre: " + animal.getNombre(), normalFont));
+                document.add(new Paragraph("Especie: " + animal.getEspecie(), normalFont));
+                document.add(new Paragraph("Raza: " + animal.getRaza(), normalFont));
+                document.add(new Paragraph("Edad: " + animal.getEdad() + " años", normalFont));
+                document.add(new Paragraph("Estado de Salud: " + animal.getEstadoSalud(), normalFont));
+                document.add(new Paragraph("Fecha de Ingreso: " + animal.getFechaIngreso(), normalFont));
+
+                // Agregar imagen del animal, si está disponible
+                if (imagenAnimal != null && imagenAnimal.getImagen() != null) {
+                    try {
+                        Image image = Image.getInstance(Base64.getDecoder().decode(imagenAnimal.getImagen()));
+                        image.scaleToFit(150, 150);
+                        image.setAlignment(Element.ALIGN_CENTER);
+                        document.add(new Paragraph("\n"));
+                        document.add(image);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        document.add(new Paragraph("\nNo se pudo cargar la imagen del animal.", normalFont));
+                    }
+                }
+            } else {
+                document.add(new Paragraph("\nNo se encontraron datos del animal.", FontFactory.getFont(FontFactory.HELVETICA_BOLD, 14)));
             }
 
             document.close();
@@ -143,7 +153,7 @@ public class GenerarComprobanteServlet extends HttpServlet {
             imagen.setIdAnimal(rs.getInt("id_animal"));
             imagen.setNombreImagen(rs.getString("nombre_imagen"));
             imagen.setTipoImagen(rs.getString("tipo_imagen"));
-            imagen.setImagen(rs.getString("imagen")); // Aquí obtenemos la imagen en Base64
+            imagen.setImagen(rs.getString("imagen"));
             imagen.setFechaSubida(rs.getDate("fecha_subida"));
             return imagen;
         }
