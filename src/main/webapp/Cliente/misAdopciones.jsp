@@ -111,7 +111,7 @@
                     <img src="data:image/jpeg;base64,${solicitud.imagenUrl}" alt="${solicitud.nombreAnimal}" class="img-misadopciones"/>
                 </c:if>
 
-                <c:if test="${solicitud.estado == 'Aprobada'}">
+                <c:if test="${solicitud.estado == 'Aprobado'}">
                     <form action="DescargarComprobanteServlet" method="post" style="display: inline;">
                         <input type="hidden" name="idSolicitud" value="${solicitud.idSolicitud}" />
                         <button type="submit" class="btn-comprobante">Descargar Comprobante</button>

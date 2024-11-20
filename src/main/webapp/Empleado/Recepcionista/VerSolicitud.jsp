@@ -79,6 +79,22 @@
             background-color: #333;
             border-color: #333;
         }
+
+        .btn-secondary {
+            background-color: #ccc;
+            border-color: #ccc;
+            color: #333;
+            font-size: 16px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .btn-secondary:hover {
+            background-color: #999;
+            border-color: #999;
+        }
     </style>
 </head>
 <body>
@@ -115,10 +131,10 @@
             <input type="hidden" name="idAdoptante" value="${solicitud.idAdoptante}">
             <div class="form-group">
                 <label for="estado">Cambiar Estado</label>
-                <select class="form-control" id="estado" name="estado">
+                <select class="form-control" id="estado" name="estado" required>
                     <option value="Pendiente" ${solicitud.estado == 'Pendiente' ? 'selected' : ''}>Pendiente</option>
-                    <option value="Aprobada" ${solicitud.estado == 'Aprobada' ? 'selected' : ''}>Aprobada</option>
-                    <option value="Rechazada" ${solicitud.estado == 'Rechazada' ? 'selected' : ''}>Rechazada</option>
+                    <option value="Aprobado" ${solicitud.estado == 'Aprobado' ? 'selected' : ''}>Aprobado</option>
+                    <option value="Rechazado" ${solicitud.estado == 'Rechazado' ? 'selected' : ''}>Rechazado</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-success mt-3">Actualizar Estado</button>

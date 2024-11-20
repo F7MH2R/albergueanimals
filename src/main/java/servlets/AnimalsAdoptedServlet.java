@@ -29,7 +29,7 @@ public class AnimalsAdoptedServlet extends HttpServlet {
 
         try (Connection conn = DatabaseConnection.initializeDatabase()) {
             // Consulta para obtener los datos de los animales con adopciones aprobadas
-            String queryAnimalesAprobados = "SELECT * FROM Animales WHERE id_animal IN (SELECT id_animal FROM solicitudes_adopcion WHERE estado = 'Aprobada')";
+            String queryAnimalesAprobados = "SELECT * FROM Animales WHERE id_animal IN (SELECT id_animal FROM solicitudes_adopcion WHERE estado = 'Aprobado')";
             PreparedStatement stmtAnimalesAprobados = conn.prepareStatement(queryAnimalesAprobados);
             ResultSet rsAnimalesAprobados = stmtAnimalesAprobados.executeQuery();
 
