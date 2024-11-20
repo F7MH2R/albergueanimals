@@ -11,7 +11,7 @@
         <h1 class="my-4 text-danger">Ocurrió un Error</h1>
         <p>Lo sentimos, algo salió mal mientras procesábamos su solicitud.</p>
         <p>Por favor, inténtelo de nuevo más tarde o contacte al administrador si el problema persiste.</p>
-        <a href="<%= request.getContextPath() %>/index.jsp" class="btn btn-primary">Volver a la Página de Inicio</a>
+        <a href="<%= request.getContextPath() %>/HomeClienteServlet" class="btn btn-primary">Volver a la Página de Inicio</a>
     </div>
 </body>
 </html>

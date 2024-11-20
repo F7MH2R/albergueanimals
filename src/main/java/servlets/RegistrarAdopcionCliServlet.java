@@ -56,7 +56,7 @@ public class RegistrarAdopcionCliServlet extends HttpServlet {
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            response.sendRedirect(request.getContextPath() + "/General/ErrorPage.jsp");
+            response.sendRedirect(request.getContextPath() + "/MisAdopcionesServlet");
         }
     }
 
