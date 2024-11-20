@@ -77,7 +77,7 @@
 
         <!-- Menú de navegación alineado a la derecha -->
         <ul class="menu-left">
-            <li><a href="<%= request.getContextPath() %>/HomeVeterinario.jsp">Inicio</a></li>
+            <li><a href="<%= request.getContextPath() %>/Empleado/Veterinario/HomeVeterinario.jsp">Inicio</a></li>
             <li><a href="<%= request.getContextPath() %>/VeterinarioAnimalsServlet">Lista de Animales</a></li>
             <li><a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar Sesión</a></li>
         </ul>

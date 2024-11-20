@@ -79,7 +79,6 @@
         <ul class="menu-left">
             <li><a href="<%= request.getContextPath() %>/InicioRecepcionistaServlet">Inicio</a></li>
             <li><a href="<%= request.getContextPath() %>/RegistrarAnimalServlet">Registrar Animal</a></li>
-            <li><a href="<%= request.getContextPath() %>/GestionAdopcionesServlet">Gestionar Adopciones</a></li>
             <li><a href="<%= request.getContextPath() %>/AnimalsServlet">Lista de Animales</a></li>
             <li><a href="<%= request.getContextPath() %>/AnimalsAdoptedServlet">Animales Adoptados</a></li>
             <li><a href="<%= request.getContextPath() %>/LogoutServlet">Cerrar Sesión</a></li>
