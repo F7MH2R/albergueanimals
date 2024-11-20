@@ -134,7 +134,7 @@
             <button type="submit" class="btn btn-primary btn-block mt-3">Ingresar</button>
         </form>
         <p class="text-center mt-3">
-            <a href="Cliente/Register.jsp">¿No tienes una cuenta? Regístrate</a>
+            <a href="/AgregarUsuarioCliServlet">¿No tienes una cuenta? Regístrate</a>
         </p>
     </div>
 </body>
