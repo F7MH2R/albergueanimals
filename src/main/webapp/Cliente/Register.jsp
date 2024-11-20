@@ -71,7 +71,7 @@
     <div class="register-container">
         <h1>Crear Usuario para Adopción</h1>
         
-        <form action="${pageContext.request.contextPath}/RegistrarUsuarioClienteServlet" method="post">
+        <form action="${pageContext.request.contextPath}/AgregarUsuarioCliServlet" method="post">
             <label for="nombreUsuario">Nombre de Usuario:</label>
             <input type="text" id="nombreUsuario" name="nombreUsuario" required>
 

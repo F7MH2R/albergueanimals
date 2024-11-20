@@ -20,21 +20,23 @@
 
         .navcliente {
             background-color: #4A665E; /* Color verde oscuro */
-            padding: 10px 20px;
+            height: 100px; /* Aumenta la altura */
+            padding: 20px 40px; /* Aumenta el espacio interior */
             display: flex;
             align-items: center;
             justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar */
         }
 
         .navcliente img {
-            width: 50px;
-            height: 50px;
+            width: 70px; /* Aumenta el tamaño del logo */
+            height: 70px;
             border-radius: 50%;
             margin-right: 20px;
         }
 
         .welcome-message-cliente {
-            font-size: 18px;
+            font-size: 22px; /* Aumenta el tamaño del texto */
             color: #FACECA; /* Color claro para el texto */
             display: flex;
             align-items: center;
@@ -49,16 +51,22 @@
         }
 
         .menu-cliente li {
-            margin-right: 20px;
+            margin-right: 30px; /* Aumenta el espacio entre los enlaces */
         }
 
         .menu-cliente li a {
             color: #FFFFFF; /* Mantiene el color blanco */
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 12px 20px; /* Aumenta el padding para un botón más grande */
+            font-size: 18px; /* Aumenta el tamaño del texto */
             font-weight: bold;
-            border-radius: 5px;
-            transition: none; /* Elimina cualquier transición */
+            border-radius: 8px; /* Bordes más redondeados */
+            background-color: transparent; /* Sin fondo */
+            transition: background-color 0.3s ease; /* Animación de hover */
+        }
+
+        .menu-cliente li a:hover {
+            background-color: #3B554D; /* Color al pasar el cursor */
         }
     </style>
 </head>

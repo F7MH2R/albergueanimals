@@ -181,6 +181,29 @@
                 <input type="file" class="form-control" id="imagen1" name="imagen1" accept="image/*" onchange="previewImage(this, 'preview1')" required>
                 <img id="preview1" class="preview-img" src="#" alt="Previsualización de Imagen 1">
             </div>
+            
+           
+            <!-- <div class="mb-3">
+            <label for="imagen2" class="form-label">Imagen 2</label>
+            <input type="file" class="form-control" id="imagen2" name="imagen2" accept="image/*" onchange="previewImage(this, 'preview2')">
+            <img id="preview2" src="#" alt="Previsualización de Imagen 2" style="display:none; width: 100px; margin-top: 10px;">
+        </div>
+        <div class="mb-3">
+            <label for="imagen3" class="form-label">Imagen 3</label>
+            <input type="file" class="form-control" id="imagen3" name="imagen3" accept="image/*" onchange="previewImage(this, 'preview3')">
+            <img id="preview3" src="#" alt="Previsualización de Imagen 3" style="display:none; width: 100px; margin-top: 10px;">
+        </div>
+        <div class="mb-3">
+            <label for="imagen4" class="form-label">Imagen 4</label>
+            <input type="file" class="form-control" id="imagen4" name="imagen4" accept="image/*" onchange="previewImage(this, 'preview4')">
+            <img id="preview4" src="#" alt="Previsualización de Imagen 4" style="display:none; width: 100px; margin-top: 10px;">
+        </div>
+        <div class="mb-3">
+            <label for="imagen5" class="form-label">Imagen 5</label>
+            <input type="file" class="form-control" id="imagen5" name="imagen5" accept="image/*" onchange="previewImage(this, 'preview5')">
+            <img id="preview5" src="#" alt="Previsualización de Imagen 5" style="display:none; width: 100px; margin-top: 10px;">
+        </div> -->
+
 
 
             <button type="submit" class="btn btnRegAnimal">Registrar Animal</button>

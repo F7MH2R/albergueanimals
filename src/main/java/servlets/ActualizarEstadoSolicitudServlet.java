@@ -19,26 +19,46 @@ public class ActualizarEstadoSolicitudServlet extends HttpServlet {
         int idSolicitud = Integer.parseInt(request.getParameter("idSolicitud"));
         String nuevoEstado = request.getParameter("estado");
 
+        // Imprimir el valor recibido
+        System.out.println("Nuevo Estado recibido: " + nuevoEstado);
+
+        // Validar que el estado sea válido
+        if (!"Pendiente".equalsIgnoreCase(nuevoEstado) && 
+            !"Aprobado".equalsIgnoreCase(nuevoEstado) && 
+            !"Rechazado".equalsIgnoreCase(nuevoEstado)) {
+            System.out.println("Error: Estado inválido recibido.");
+            response.sendRedirect(request.getContextPath() + "/General/ErrorPage.jsp?error=EstadoInvalido");
+            return;
+        }
+
         try (Connection conn = DatabaseConnection.initializeDatabase()) {
+            System.out.println("Conexión a la base de datos establecida.");
+
             // Actualizar el estado de la solicitud
             String updateQuery = "UPDATE solicitudes_adopcion SET estado = ? WHERE id_solicitud = ?";
             PreparedStatement stmt = conn.prepareStatement(updateQuery);
             stmt.setString(1, nuevoEstado);
             stmt.setInt(2, idSolicitud);
-            stmt.executeUpdate();
+            int rowsUpdated = stmt.executeUpdate();
 
-            // Si el estado es "Aprobada", registrar en la tabla adopciones
-            if ("Aprobada".equals(nuevoEstado)) {
+            System.out.println("Filas actualizadas en solicitudes_adopcion: " + rowsUpdated);
+
+            // Si el estado es "Aprobado", registrar en la tabla adopciones
+            if ("Aprobado".equalsIgnoreCase(nuevoEstado)) {
                 String insertAdopcionQuery = "INSERT INTO adopciones (id_animal, id_adoptante, fecha_adopcion) " +
                                              "SELECT id_animal, id_adoptante, CURDATE() FROM solicitudes_adopcion WHERE id_solicitud = ?";
                 PreparedStatement insertStmt = conn.prepareStatement(insertAdopcionQuery);
                 insertStmt.setInt(1, idSolicitud);
-                insertStmt.executeUpdate();
+                int rowsInserted = insertStmt.executeUpdate();
+
+                System.out.println("Filas insertadas en adopciones: " + rowsInserted);
             }
 
             // Redirigir a la página de lista de animales adoptados
-            response.sendRedirect(request.getContextPath() + "/AnimalsAdoptedServlet");
+            System.out.println("Redirigiendo a AnimalsAdoptedServlet...");
+                response.sendRedirect(request.getContextPath() + "/AnimalsServlet");
         } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Error al procesar la solicitud: " + e.getMessage());
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/General/ErrorPage.jsp");
         }

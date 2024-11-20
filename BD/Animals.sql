@@ -269,3 +269,59 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2024-11-07 22:27:21
+
+select * from animales
+select * from adopciones
+select * from solicitudes_adopcion
+
+-- Eliminar la tabla si ya existe
+DROP TABLE IF EXISTS `solicitudes_adopcion`;
+
+-- Crear la tabla con una columna física para manejar la restricción
+CREATE TABLE `solicitudes_adopcion` (
+  `id_solicitud` int(11) NOT NULL AUTO_INCREMENT,
+  `id_adoptante` int(11) DEFAULT NULL,
+  `id_animal` int(11) DEFAULT NULL,
+  `fecha_solicitud` date NOT NULL,
+  `estado` varchar(20) NOT NULL CHECK (`estado` IN ('Pendiente', 'Aprobado', 'Rechazado')),
+  `restriccion_pendiente` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_solicitud`),
+  UNIQUE KEY `unique_solicitud_pendiente` (`restriccion_pendiente`), -- Restringe solicitudes pendientes duplicadas
+  KEY `id_adoptante` (`id_adoptante`),
+  KEY `id_animal` (`id_animal`),
+  CONSTRAINT `solicitudes_adopcion_ibfk_1` FOREIGN KEY (`id_adoptante`) REFERENCES `adoptantes` (`id_adoptante`) ON DELETE CASCADE,
+  CONSTRAINT `solicitudes_adopcion_ibfk_2` FOREIGN KEY (`id_animal`) REFERENCES `animales` (`id_animal`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- Crear el TRIGGER para manejar actualizaciones en `restriccion_pendiente`
+-- Crear trigger para BEFORE INSERT
+DELIMITER $$
+CREATE TRIGGER trg_before_insert_restriccion_pendiente
+BEFORE INSERT ON `solicitudes_adopcion`
+FOR EACH ROW
+BEGIN
+  -- Solo asignar valor si el estado es 'Pendiente'
+  IF NEW.estado = 'Pendiente' THEN
+    SET NEW.restriccion_pendiente = CONCAT(NEW.id_adoptante, '-', NEW.id_animal);
+  ELSE
+    SET NEW.restriccion_pendiente = NULL;
+  END IF;
+END$$
+DELIMITER ;
+
+-- Crear trigger para BEFORE UPDATE
+DELIMITER $$
+CREATE TRIGGER trg_before_update_restriccion_pendiente
+BEFORE UPDATE ON `solicitudes_adopcion`
+FOR EACH ROW
+BEGIN
+  -- Solo asignar valor si el estado es 'Pendiente'
+  IF NEW.estado = 'Pendiente' THEN
+    SET NEW.restriccion_pendiente = CONCAT(NEW.id_adoptante, '-', NEW.id_animal);
+  ELSE
+    SET NEW.restriccion_pendiente = NULL;
+  END IF;
+END$$
+DELIMITER ;
+
+select * from usuarios

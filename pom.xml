@@ -20,10 +20,12 @@
             <scope>provided</scope>
         </dependency>
         <!-- Dependencia del conector MySQL -->
+        
+        
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.33</version> <!-- Usa la última versión estable disponible -->
+            <version>8.0.33</version> <!-- Usa la versión compatible con tu entorno -->
         </dependency>
         
         <dependency>

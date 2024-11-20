@@ -28,7 +28,7 @@ public class HomeClienteServlet extends HttpServlet {
 
         try (Connection conn = DatabaseConnection.initializeDatabase()) {
             // Consulta para obtener los datos de los animales sin adopciones aprobadas
-            String queryAnimales = "SELECT * FROM Animales WHERE id_animal NOT IN (SELECT id_animal FROM solicitudes_adopcion WHERE estado = 'Aprobada')";
+            String queryAnimales = "SELECT * FROM Animales WHERE id_animal NOT IN (SELECT id_animal FROM solicitudes_adopcion WHERE estado = 'Aprobado')";
             PreparedStatement stmtAnimales = conn.prepareStatement(queryAnimales);
             ResultSet rsAnimales = stmtAnimales.executeQuery();
 
