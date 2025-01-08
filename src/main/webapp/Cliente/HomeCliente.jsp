@@ -78,27 +78,25 @@
             margin-bottom: 15px;
         }
 
-        /* Estilos específicos para los botones en el cliente home */
         .btn-clientehome {
-            background-color: #4A665E; /* Verde oscuro */
+            background-color: #4A665E;
             border-color: #4A665E;
             color: #ffffff;
             padding: 8px 16px;
             font-size: 16px;
             border-radius: 5px;
             text-align: center;
-            width: 100%; /* Ancho completo */
+            width: 100%;
             margin-bottom: 5px;
             text-decoration: none;
             transition: background-color 0.3s ease;
         }
 
-        /* Cambia el color del botón en hover al color de la imagen proporcionada */
         .btn-clientehome:hover {
-            background-color: #6B847A; /* Color específico proporcionado */
+            background-color: #6B847A;
             border-color: #6B847A;
             color: #ffffff;
-            text-decoration: none; /* Elimina el subrayado en hover */
+            text-decoration: none;
         }
 
         .row {
@@ -108,6 +106,22 @@
             justify-content: center;
         }
     </style>
+    <script>
+        // Script para filtrar las tarjetas de animales
+        function buscarAnimales() {
+            const input = document.getElementById("buscador").value.toLowerCase();
+            const cards = document.querySelectorAll(".card-cliente");
+            
+            cards.forEach(card => {
+                const nombre = card.querySelector(".card-title-cliente").textContent.toLowerCase();
+                if (nombre.includes(input)) {
+                    card.parentElement.style.display = "block";
+                } else {
+                    card.parentElement.style.display = "none";
+                }
+            });
+        }
+    </script>
 </head>
 <body class="bodyclientehome">
 
@@ -119,6 +133,11 @@
         <p>Esta es la página de inicio para los clientes.</p>
         
         <h2 class="subtitle-cliente my-4">Animales</h2>
+
+        <%-- Barra de búsqueda --%>
+        <div class="mb-4">
+            <input type="text" id="buscador" class="form-control" placeholder="Buscar por nombre de animal..." onkeyup="buscarAnimales()">
+        </div>
 
         <div class="row">
             <%-- Recorre animalesList para mostrar cada animal --%>
